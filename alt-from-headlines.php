@@ -1,12 +1,40 @@
 <?php
 /**
  * Plugin Name: ALT Auto & Fixer
- * Description: Автоматически ставит ALT у новых изображений, массово заполняет ALT в медиатеке, чинит ALT в контенте (Гутенберг и классический), и гарантирует ALT на рендере.
- * Version: 1.2.1
+ * Description: Автоматически ставит ALT у новых изображений, массово заполняет ALT в медиатеке, чинит ALT в контенте (Гутенберг и классический), и гарантирует ALT на рендере. Включает панель Gutenberg для проставления ALT из заголовков.
+ * Version: 2.0.0
  * Author: 7ON
  */
 
 if ( ! defined('ABSPATH') ) exit;
+
+/** ===================== Gutenberg Panel ===================== */
+add_action('enqueue_block_editor_assets', function(){
+    // Проверяем права доступа
+    if ( ! current_user_can('edit_posts') && ! current_user_can('manage_options') ) {
+        return;
+    }
+
+    $plugin_url = plugin_dir_url(__FILE__);
+    $plugin_path = plugin_dir_path(__FILE__);
+
+    // Регистрируем и подключаем JavaScript
+    wp_enqueue_script(
+        'alt-from-headlines-gutenberg',
+        $plugin_url . 'assets/gutenberg-panel.js',
+        ['wp-plugins', 'wp-edit-post', 'wp-element', 'wp-components', 'wp-data', 'wp-i18n'],
+        filemtime($plugin_path . 'assets/gutenberg-panel.js'),
+        true
+    );
+
+    // Регистрируем и подключаем CSS
+    wp_enqueue_style(
+        'alt-from-headlines-gutenberg-style',
+        $plugin_url . 'assets/gutenberg-panel.css',
+        [],
+        filemtime($plugin_path . 'assets/gutenberg-panel.css')
+    );
+});
 
 /** ===================== Helpers ===================== */
 function tfc_get_alt_by_attachment( $att_id ){

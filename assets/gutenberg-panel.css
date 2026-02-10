@@ -1,0 +1,29 @@
+.alt-from-headlines-panel .components-panel__body {
+    border-top: 1px solid #e0e0e0;
+}
+
+.alt-from-headlines-panel .components-panel__row {
+    display: block;
+}
+
+.alt-from-headlines-panel .components-checkbox-control {
+    margin-bottom: 8px;
+}
+
+.alt-from-headlines-panel .components-checkbox-control:last-of-type {
+    margin-bottom: 0;
+}
+
+.alt-from-headlines-panel .components-checkbox-control__label {
+    font-weight: 500;
+}
+
+.alt-from-headlines-panel .components-notice {
+    margin: 0;
+    padding: 8px 12px;
+}
+
+.alt-from-headlines-panel .components-notice__content {
+    margin: 0;
+    font-size: 13px;
+}
