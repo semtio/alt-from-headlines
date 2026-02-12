@@ -151,7 +151,6 @@
                   )
               )
             : null;
-selectAllCheckbox,
 
         var panelInner = createElement(
             PanelRow,
@@ -164,6 +163,7 @@ selectAllCheckbox,
                     { style: { marginTop: 0, marginBottom: '12px', fontSize: '13px', color: '#757575' } },
                     'Выберите уровни заголовков:'
                 ),
+                selectAllCheckbox,
                 headingCheckboxes,
                 createElement(
                     'div',
