@@ -50,6 +50,19 @@
             });
         };
 
+        var handleSelectAll = function () {
+            var allChecked = headings.every(function (level) {
+                return selectedHeadings[level];
+            });
+            setSelectedHeadings(function (prev) {
+                var next = {};
+                headings.forEach(function (level) {
+                    next[level] = !allChecked;
+                });
+                return next;
+            });
+        };
+
         var processBlocks = function () {
             console.log('[ALT FROM HEADLINES] processing blocks:', blocks.length);
             setProcessing(true);
@@ -105,6 +118,18 @@
             }, 5000);
         };
 
+        var allChecked = headings.every(function (level) {
+            return selectedHeadings[level];
+        });
+
+        var selectAllCheckbox = createElement(CheckboxControl, {
+            key: 'select-all',
+            label: 'Выбрать все / Снять все',
+            checked: allChecked,
+            onChange: handleSelectAll,
+            style: { fontWeight: 'bold', marginBottom: '8px' },
+        });
+
         var headingCheckboxes = headings.map(function (level) {
             return createElement(CheckboxControl, {
                 key: level,
@@ -126,6 +151,7 @@
                   )
               )
             : null;
+selectAllCheckbox,
 
         var panelInner = createElement(
             PanelRow,
